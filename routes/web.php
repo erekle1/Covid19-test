@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (\App\Services\DevTestAPIService $APIService) {
+    $countries = $APIService->getCountries();
+    foreach ($countries as $country){
+
+    }
+    return response()->json();
 });
