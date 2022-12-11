@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CountryController;
 use App\Http\Controllers\API\PersonalAccessTokensController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\API\StatisticController;
 use Illuminate\Support\Facades\Route;
 
 /*

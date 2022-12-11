@@ -5,18 +5,6 @@
  */
 
 require('./bootstrap')
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import { createApp } from 'vue'
-import statIndex from './pages/statistic/Index'
-import AccessToken from "./components/AccessToken";
 
-import store from './store'
-const app = createApp({})
-app.component('stat-index', statIndex)
-app.component('access-token', AccessToken)
-axios.defaults.withCredentials = true;
-app.use(store);
-app.use(VueAxios, axios)
-app.mount('#app')
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
