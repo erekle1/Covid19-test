@@ -34,7 +34,9 @@ class DevTestAPIService
      */
     public function getStatisticByCountry(string $countryCode)
     {
-        $response = Http::post($this->baseUrl . 'get-country-statistics');
+        $response = Http::accept('application/json')->post($this->baseUrl . 'get-country-statistics', [
+            'code' => $countryCode
+        ]);
         if ($response->successful()) {
             return $response->json();
         }

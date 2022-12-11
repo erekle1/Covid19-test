@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\PersonalAccessTokensController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/tokens/create', [PersonalAccessTokensController::class, 'store'])->middleware('auth');
+
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+//Route::post('register', [AuthController::class, 'register']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('user', [AuthController::class, 'me']);
+    Route::get('access_tokens', [PersonalAccessTokensController::class, 'index']);
+    Route::get('countries', [CountryController::class, 'index']);
+    Route::get('statistics', [StatisticController::class, 'index']);
+    Route::get('get-stats/{country_code}', [CountryController::class, 'getStatsByCountryCode'])->where('country_code', '[A-Z]{2}$')->name('stats_by_country');
 });

@@ -19,6 +19,7 @@ class CreateStatisticsTable extends Migration
             $table->unsignedInteger('confirmed');
             $table->unsignedInteger('recovered');
             $table->unsignedInteger('death');
+            $table->timestamps();
         });
     }
 

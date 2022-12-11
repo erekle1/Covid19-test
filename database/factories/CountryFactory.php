@@ -14,7 +14,11 @@ class CountryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => json_encode([
+                $this->faker->languageCode() => $this->faker->country(),
+                $this->faker->languageCode() => $this->faker->country(),
+            ]),
+            'code' => $this->faker->countryCode()
         ];
     }
 }

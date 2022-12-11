@@ -12,5 +12,8 @@ class Country extends Model
     public $timestamps = false;
     protected $fillable = ['name', 'code'];
 
-
+    public function statistics()
+    {
+        return $this->hasMany(Statistic::class);
+    }
 }

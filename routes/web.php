@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (\App\Services\DevTestAPIService $APIService) {
-    $countries = $APIService->getCountries();
-    foreach ($countries as $country){
-
-    }
-    return response()->json();
+Route::get('/', function () {
+    return view('welcome');
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
