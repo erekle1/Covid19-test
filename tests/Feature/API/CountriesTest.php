@@ -2,7 +2,6 @@
 
 namespace API;
 
-use App\Models\Country;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
@@ -17,10 +16,14 @@ class CountriesTest extends TestCase
      *
      * @return void
      */
-    public function test_read_countries()
+    public function test_auth_user_can_read_countries()
     {
         Sanctum::actingAs(User::factory()->create());
         $response = $this->get(route('api.countries'));
+        $response->assertJsonStructure([
+            'data' => [],
+            'meta' => [],
+        ]);
         $response->assertStatus(200);
     }
 }

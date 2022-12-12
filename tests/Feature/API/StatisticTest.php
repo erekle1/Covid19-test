@@ -11,14 +11,14 @@ class StatisticTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_read_countries()
+    public function test_auth_user_can_read_countries()
     {
         Sanctum::actingAs(User::factory()->create());
-        $response = $this->get(route('api.statistics'));
+        $response = $this->get(route('api.statistics.summery'));
         $response->assertJsonStructure([
-            'data'  => [],
-            'links' => [],
-            'meta'  => []
+            'death',
+            'recovered',
+            'confirmed',
         ]);
         $response->assertStatus(200);
     }

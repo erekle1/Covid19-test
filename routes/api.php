@@ -25,5 +25,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('api.logout');
     Route::get('user', [AuthController::class, 'me'])->name('api.user');
     Route::get('countries', [CountryController::class, 'index'])->name('api.countries');
-    Route::get('statistics/summary', [StatisticController::class, 'summary'])->name('api.statistics');
+    Route::get('statistics/summary', [StatisticController::class, 'summary'])->name('api.statistics.summery');
 });
