@@ -22,7 +22,7 @@ class AuthController extends Controller
         }
         $token = auth()->user()->createToken('user-token');
         return response()->json([
-            'message' => ['successfully logged in'],
+            'message' => 'successfully logged in',
             'token'   => $token->plainTextToken
         ], 200);
     }
