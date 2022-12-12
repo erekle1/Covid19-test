@@ -45,6 +45,7 @@ class GetCovidData extends Command
         foreach ($countries as $country) {
             $result = $service->getStatisticByCountry($country->code);
             $latestStatistic = $country->statistics()->latest()->first();
+            //if something wrong on api side this script does not execute - returns -1
             if ($result != -1) {
                 $lastUpdateDayFromApi = Carbon::parse($result['updated_at'])->day;
                 $lastUpdateDayLocal = Carbon::parse($country->updated_at)->day;
@@ -53,11 +54,12 @@ class GetCovidData extends Command
                     'recovered' => $result['recovered'],
                     'death'     => $result['deaths'],
                 ];
+                //add a new record if it's not exist
                 if (empty($latestStatistic) || $lastUpdateDayFromApi != $lastUpdateDayLocal) {
                     $payload['country_id'] = $country->id;
                     Statistic::create($payload);
                 }
-
+                // update record if this exists
                 if ($lastUpdateDayFromApi == $lastUpdateDayLocal) {
                     $country->update($payload);
                     $country->save();

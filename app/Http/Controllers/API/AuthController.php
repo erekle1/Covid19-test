@@ -12,19 +12,19 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     /**
+     *
      * @throws AuthenticationException
      */
-    public function login(LoginRequest $request): array
+    public function login(LoginRequest $request): \Illuminate\Http\JsonResponse
     {
-
         if (!auth()->attempt($request->only('email', 'password'))) {
             throw new AuthenticationException("Email or password is not valid");
         }
         $token = auth()->user()->createToken('user-token');
-        return [
+        return response()->json([
             'message' => ['successfully logged in'],
             'token'   => $token->plainTextToken
-        ];
+        ], 200);
     }
 
     /**

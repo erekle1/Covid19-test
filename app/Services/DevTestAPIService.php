@@ -11,7 +11,13 @@ use Illuminate\Support\Facades\Log;
  */
 class DevTestAPIService
 {
-    private $baseUrl = "https://devtest.ge/";
+    private $baseUrl;
+
+    public function __construct($config)
+    {
+        $this->baseUrl = $config()->get('devtestapi')['base_url'];
+
+    }
 
     /**
      * get countries data from the external api
@@ -34,6 +40,7 @@ class DevTestAPIService
      */
     public function getStatisticByCountry(string $countryCode)
     {
+//        dd($this->baseUrl . 'get-country-statistics',$countryCode);
         $response = Http::accept('application/json')->post($this->baseUrl . 'get-country-statistics', [
             'code' => $countryCode
         ]);

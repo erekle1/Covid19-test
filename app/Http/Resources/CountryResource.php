@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StatisticResource extends JsonResource
+class CountryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,10 @@ class StatisticResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'country'   => CountryResource::make($this->whenLoaded('country')),
-            'confirmed' => $this->confirmed,
-            'recovered' => $this->recovered,
-            'death'     => $this->death
+            'country'    => $this->name,
+            'id'         => $this->id,
+            'code'       => $this->code,
+            'statistics' => StatisticResource::collection($this->whenLoaded('statistics')),
         ];
     }
 }

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $r = app()->make('config');
+    dd($r->get('devtestapi'));
     return view('welcome');
 });
 
