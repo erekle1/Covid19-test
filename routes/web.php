@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $r = app()->make('config');
-    dd($r->get('devtestapi'));
-    return view('welcome');
+    return ['Laravel' => app()->version()];
 });
 
+require __DIR__.'/auth.php';
